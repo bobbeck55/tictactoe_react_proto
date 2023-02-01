@@ -1,86 +1,79 @@
+
 body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
-  }
-  
-  ol,
-  ul {
-    padding-left: 30px;
-  }
-  
-  .board-row:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
-  
-  .status {
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  
-  .square {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 100px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-  }
-  .square_highlighted {
-    background: #fff;
-    background-color: yellow;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-  }
-  .square:focus {
-    outline: none;
-  }
-  
-  /* .kbd-navigation .square:focus {
-    background: #ddd;
-  } */
-  
-  .game {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .game-info {
-    margin-left: 20px;
-  }
-  
-  .current-move {
-    font-weight: bold;
-    border: 2px solid rgb(20, 199, 223);
-  }
-  
-  .menu-btn {
-    width: 230px;
-  }
-  
-  .highlight {
-    border: 2px solid rgb(20, 199, 223);
-  }
-  
-.horizontalgap {
-    float: left;
-    overflow: hidden;
-    height: 1px;
-    width: 0px;
-  }
+  font: 14px "Century Gothic", Futura, sans-serif;
+  margin: 20px;
+}
+
+ol,
+ul {
+  padding-left: 30px;
+}
+
+.board-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.square {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square_highlighted {
+  background: #fff;
+  background-color: yellow;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.square:focus {
+  outline: none;
+}
+
+
+.game {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.current-move {
+  font-weight: bold;
+  border: 2px solid rgb(20, 199, 223);
+}
+
+.menu-btn {
+  width: 230px;
+}
+
+.highlight {
+  border: 2px solid rgb(20, 199, 223);
+}
