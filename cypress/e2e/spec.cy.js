@@ -19,8 +19,7 @@ describe('spec.cy.js', () => {
 
 
   it ('Winner: O', () => {
-    const winnerO = [1, 2, 0, 4, 6, 8, 7, 6, 8];
-    //    const winnerO = [1, 2, 0, 5, 4, 7, 6, 8];
+    const winnerO = [1, 2, 0, 5, 4, 7, 6, 8];
     expect(cy.TestWinner(winnerO, "Winner: O")).not.equal(null);
     cy.percySnapshot();
   })
