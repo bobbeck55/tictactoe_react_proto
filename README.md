@@ -35,5 +35,7 @@ set PERCY_BRANCH=master (not same as git branch 'master') | local
 
 
 FAQ -
-cypress not working - check to see it is using an installed and supported
+1. cypress not working - check to see it is using an installed and supported
 browser. if cypress is using electron it will not work if electron is not installed.
+2. sample results - build 136
+
