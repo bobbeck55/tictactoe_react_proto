@@ -27,8 +27,13 @@ cypress run
 c. REACT app with PERCY snapshots of CYPRESS automated
 testing
 
-percy exec -- cypress run (percy does not work with 'cypress open')
+percy exec -- cypress run
+(percy does not work with 'cypress open')
 
 set PERCY_TOKEN=<token from percy.io>
 set PERCY_BRANCH=master (not same as git branch 'master') | local
 
+
+FAQ -
+cypress not working - check to see it is using an installed and supported
+browser. if cypress is using electron it will not work if electron is not installed.
