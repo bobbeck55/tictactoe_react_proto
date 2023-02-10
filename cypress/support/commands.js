@@ -29,19 +29,22 @@
 
 Cypress.Commands.add('TestWinner', (squareIndices, searchText) => {
 
+  cy.log("TestWinner command");
 
-  cy.get('.square').each(($el, index, $list) => {
+  for (let i = 0; i < squareIndices.length; i++) {
 
-    foreach (squareIndex in squareIndices)
-    {
-      if (squareIndex == index)
+    cy.get('.square').each(($el, index, $list) => {
+
+      if (squareIndices[i] === index)
       {
+        cy.log("index to click: ", index, squareIndices[i]);
         cy.wrap($el.click());
+        cy.wait(0.1);
       }
-    }
 
-    return cy.get('.status').should('have.text', searchText);
-  
-  })
+    })
+  }
+
+  return cy.get('.status').should('have.text', searchText);
 
 })
