@@ -56,6 +56,8 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
           }
         }
       }
+
+      console.log("getSquareRows: ", content)
       return content;
     }
 

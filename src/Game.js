@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import Board from './Board.js';
+import MoveMessagesHistory from './MoveMessagesHistory.js';
 
 /*
   Represents the TicTacToe Game on the TicTacToe
@@ -26,67 +27,19 @@ export default function Game() {
       displayLastMoveLine = tempDisplayLastMoveLine;
     }
 
-    // handles click on a "go to move #" message
-    function jumpTo(nextMove) {
-      console.log("jumpTo - nextMove: ", nextMove);
-      setCurrentMove(nextMove);
+    // returns position index where squares != nextSquares
+    // (assumes squares and nextSquares are only different by one position)
+    function diffSquares(squares, nextSquares)
+    {
+
+      for (let i = 0; i < 9; i++)
+      {
+        if (squares[i] !== nextSquares[i])
+          return i;
+      }
+
+      return null;
     }
-
-    // loop through history array and generate a message
-    // for display to the right of the board
-    const moves = history.map((squares, move) => {
-
-        let description;
-        if ((move === history.length-1) && !displayLastMoveLine)
-        {
-          return ("");
-        }
-
-        if (move > 0) {
-            if (currentMove === move)
-            {
-                description = 'You are at move #' + move;
-            } else {
-                description = 'Go to move #' + move;
-            }
-        } else {
-          if (move === currentMove)
-          {
-            description = "You are at game start";
-          }
-          else
-          {
-            description = 'Go to game start';
-          }
-        }
-        
-        let diffSquaresPosition = moveNoPositionAssociation[move];
-        console.log(diffSquaresPosition);
-
-        let row, column;
-        if (diffSquaresPosition !== undefined)
-        {
-          row = Math.ceil((diffSquaresPosition+1) / 3);
-          column = (diffSquaresPosition+1) - (row-1)*3;
-          description += ", (" + row + ", " + column + ")";
-
-          // return "go to move#" message
-          return (
-            <li key={move}>
-              <button onClick={() => jumpTo(move)}>{description}</button>
-            </li>
-          );
-        }
-        else
-        {
-          // return "go to move#" message
-          return (
-            <li key="">
-              {description}
-            </li>
-          );
-        }
-      });
 
     // displays and handles mouse input on gamee board and displays move
     // history BUT does not handle clicks on the "toggle move history order"
@@ -122,7 +75,7 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} sendDataToParent={getDataFromChild} />
         </div>
         <div className="game-info">
-        <ol> {moves} </ol>
+        <MoveMessagesHistory history={history} currentMove={currentMove} setCurrentMove={setCurrentMove} moveNoPositionAssociation={moveNoPositionAssociation} displayLastMoveLine={displayLastMoveLine} />
         </div>
         <ul>
         <button onClick={() => toggleMoveHistoryOrder()} type="submit">Toggle Move History Order</button>
@@ -131,16 +84,3 @@ export default function Game() {
     );
   }
 
-  // returns position index where squares != nextSquares
-  // (assumes squares and nextSquares are only different by one position)
-  function diffSquares(squares, nextSquares)
-  {
-
-    for (let i = 0; i < 9; i++)
-    {
-      if (squares[i] !== nextSquares[i])
-        return i;
-    }
-
-    return null;
-  }
