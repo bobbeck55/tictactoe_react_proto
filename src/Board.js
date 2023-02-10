@@ -1,8 +1,14 @@
 
 import Square from './Square.js';
 
+/*
+  Represents the TicTacToe Board on the TicTacToe
+  Game web page
+*/
 export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
 
+    // each time the 'Board' is rendered, calculate the winner and
+    // update the 'Game' web page
     let {winner, a, b, c, draw} = calculateWinner(squares) || {};
 
     let status;
@@ -14,8 +20,11 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
       else
         status = 'Next Player: ' + (xIsNext ? 'X' : 'O');
     }
+    // send draw || winner status to 'Game' parent
     sendDataToParent(!(draw || winner));
 
+    // handle a click on an individual 'square' on the TicTacToe
+    // board
     function handleClick(i) {
       const nextSquares = squares.slice();
       if (xIsNext) {
@@ -26,6 +35,10 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
       onPlay(nextSquares);
     }
 
+    /*
+      generate the content of the 'Game' board from memory ('squares')
+      and represent it using the 'Square' function
+    */
     function getSquareRows(squares, handleClick, n) {
       let content = [];
 
@@ -45,6 +58,7 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
       return content;
     }
 
+    // return web page data
     return (
       <>
         <div className="status">{status}</div>
@@ -52,6 +66,10 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
       </>
     );
   }
+
+  /*
+    calculate the winner of the tictactoe game
+  */
 
 function calculateWinner(squares) {
   const lines = [

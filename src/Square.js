@@ -1,3 +1,6 @@
+
+// Generates an individual 'square' on the tictactoe
+// game board
 export default function Square({ value, onSquareClick, highlightBoolean }) {
 
 
@@ -8,17 +11,17 @@ export default function Square({ value, onSquareClick, highlightBoolean }) {
         {value}
       </button>
     );
-}
-else
-{
+  }
+  else
+  {
 
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
+    return (
+      <button className="square" onClick={onSquareClick}>
+        {value}
+      </button>
+    );
 
-}
+  }
 
 
 }

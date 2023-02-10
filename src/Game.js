@@ -2,8 +2,13 @@
 import React, { useState } from 'react';
 import Board from './Board.js';
 
+/*
+  Represents the TicTacToe Game on the TicTacToe
+  Game web page
+*/
 export default function Game() {
 
+    // game 'state' memory managed by react
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0); // most recent player's click on game board
     const xIsNext = currentMove % 2 === 0; // put 'X' or 'O' next in the game board's square
@@ -13,12 +18,22 @@ export default function Game() {
 
     let displayLastMoveLine = false;
 
+    // function handle sent to child so it can return the
+    // last move line
     function getDataFromChild(tempDisplayLastMoveLine)
     {
       console.log("displayMoveLine from child: ", tempDisplayLastMoveLine);
       displayLastMoveLine = tempDisplayLastMoveLine;
     }
 
+    // handles click on a "go to move #" message
+    function jumpTo(nextMove) {
+      console.log("jumpTo - nextMove: ", nextMove);
+      setCurrentMove(nextMove);
+    }
+
+    // loop through history array and generate a message
+    // for display to the right of the board
     const moves = history.map((squares, move) => {
 
         let description;
@@ -55,6 +70,7 @@ export default function Game() {
           column = (diffSquaresPosition+1) - (row-1)*3;
           description += ", (" + row + ", " + column + ")";
 
+          // return "go to move#" message
           return (
             <li key={move}>
               <button onClick={() => jumpTo(move)}>{description}</button>
@@ -63,6 +79,7 @@ export default function Game() {
         }
         else
         {
+          // return "go to move#" message
           return (
             <li key="">
               {description}
@@ -71,7 +88,8 @@ export default function Game() {
         }
       });
 
-
+    // displays and handles mouse input on gamee board and displays move
+    // history BUT does not handle clicks on the "toggle move history order"
     function handlePlay(nextSquares) {
       let diffSquaresPosition = diffSquares(currentSquares, nextSquares);
       let movePositionTemp = moveNoPositionAssociation;
@@ -83,7 +101,7 @@ export default function Game() {
       console.log(nextHistory);
     }
 
-
+    // handles click on "toggle move history order" button
     function toggleMoveHistoryOrder()
     {
       console.log("handleToggleMoveHistoryOrder")
@@ -97,11 +115,7 @@ export default function Game() {
       console.log(nextHistory);
     }
 
-    function jumpTo(nextMove) {
-      console.log("jumpTo - nextMove: ", nextMove);
-      setCurrentMove(nextMove);
-    }
-
+    // returns content for entire game board, move messages, and toggle move order button
     return (
       <div className="game">
         <div className="game-board">
