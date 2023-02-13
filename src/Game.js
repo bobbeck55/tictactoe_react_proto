@@ -8,6 +8,8 @@ import MoveMessagesHistory from './MoveMessagesHistory.js';
   Game web page
 */
 export default function Game() {
+   
+    console.log("Game");
 
     // game 'state' memory managed by react
     const [history, setHistory] = useState([Array(9).fill(null)]);
@@ -31,6 +33,7 @@ export default function Game() {
     // (assumes squares and nextSquares are only different by one position)
     function diffSquares(squares, nextSquares)
     {
+      console.log("diffSquares");
 
       for (let i = 0; i < 9; i++)
       {
@@ -44,6 +47,8 @@ export default function Game() {
     // displays and handles mouse input on gamee board and displays move
     // history BUT does not handle clicks on the "toggle move history order"
     function handlePlay(nextSquares) {
+      console.log("handlePlay");
+
       let diffSquaresPosition = diffSquares(currentSquares, nextSquares);
       let movePositionTemp = moveNoPositionAssociation;
       movePositionTemp[currentMove] = diffSquaresPosition;

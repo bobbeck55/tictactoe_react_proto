@@ -2,13 +2,13 @@
 
 export default function  MoveMessagesHistory(props)
 { 
+    console.log("MoveMessagesHistory");
+
     const history = props.history;
     const currentMove = props.currentMove; 
     const setCurrentMove = props.setCurrentMove;
     const moveNoPositionAssociation = props.moveNoPositionAssociation;
     const displayLastMoveLine = props.displayLastMoveLine;
-
-    console.log("MoveMessagesHistory");
 
     // handles click on a "go to move #" message
     function jumpTo(nextMove) {
@@ -42,7 +42,6 @@ export default function  MoveMessagesHistory(props)
       }
 
       let diffSquaresPosition = moveNoPositionAssociation[move];
-      //console.log(diffSquaresPosition);
 
       let row, column;
       if (diffSquaresPosition !== undefined) {

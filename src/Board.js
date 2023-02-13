@@ -8,6 +8,8 @@ import { calculateWinner } from './Winner.js';
 */
 export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
 
+    console.log("Board")
+
     // each time the 'Board' is rendered, calculate the winner and
     // update the 'Game' web page
     let {winner, a, b, c, draw} = calculateWinner(squares) || {};
@@ -43,6 +45,8 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
     function getSquareRows(squares, handleClick, n) {
       let content = [];
 
+      console.log("getSquareRows: ", content)
+
       for (let i = 0; i < n; i++)
       {
         content.push(<div key={n*i+3*n} className="board-row"></div>);
@@ -56,8 +60,6 @@ export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
           }
         }
       }
-
-      console.log("getSquareRows: ", content)
       return content;
     }
 

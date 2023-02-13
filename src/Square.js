@@ -3,6 +3,7 @@
 // game board
 export default function Square({ value, onSquareClick, highlightBoolean }) {
 
+  console.log("Square");
 
   if (highlightBoolean === "true")
   {

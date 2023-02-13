@@ -4,6 +4,9 @@
     calculate the winner of the tictactoe game
 */
 export function calculateWinner(squares) {
+    
+    console.log("calculateWinner");
+
     // in-memory representation of game board
     const lines = [
         [0, 1, 2],
