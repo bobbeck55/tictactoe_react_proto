@@ -8,7 +8,7 @@ import { calculateWinner } from './Winner.js';
 */
 export default function Board({ xIsNext, squares, onPlay, sendDataToParent }) {
 
-    console.log("Board")
+    console.log("Board function")
 
     // each time the 'Board' is rendered, calculate the winner and
     // update the 'Game' web page
