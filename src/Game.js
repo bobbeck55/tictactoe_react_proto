@@ -11,6 +11,11 @@ export default function Game() {
    
     console.log("Game");
 
+  let i;
+  if (i == 1) {
+    console.log("i = 1");
+  }
+
     // game 'state' memory managed by react
     const [history, setHistory] = useState([Array(9).fill(null)]);
     const [currentMove, setCurrentMove] = useState(0); // most recent player's click on game board
