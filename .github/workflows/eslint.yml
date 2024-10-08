@@ -37,11 +37,11 @@ jobs:
           npm install eslint@8.10.0
           
       - name: Run ESLint
-        run: npx eslint  --output-file eslint-results.sarif
+        run: npx eslint  --output-file eslint-results.sarif src
         continue-on-error: true
         
       - name: Run ESLint output
-        run: npx eslint 
+        run: npx eslint src
         continue-on-error: true
           
       - name: Upload analysis results to GitHub
