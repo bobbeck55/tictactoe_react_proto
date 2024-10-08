@@ -31,17 +31,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install ESLint
-        run: |
-          npm install eslint@8.10.0
-          
+      - name: Install npm 
+        run: npm install
       - name: Run ESLint
         run: npx eslint --ext .ts,.tsx,.js  --format sarif --output-file eslint-results.sarif src
-        continue-on-error: true
-        
-      - name: Run ESLint output
-        run: npx eslint --ext .ts,.tsx,.js --format sarif src
         continue-on-error: true
           
       - name: Upload analysis results to GitHub
