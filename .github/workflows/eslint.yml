@@ -32,9 +32,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install npm 
-        run: npm install
+        run: npm install @microsoft/eslint-formatter-sarif --save-dev
       - name: Run ESLint
-        run: npx eslint --ext .ts,.tsx,.js  --format sarif --output-file eslint-results.sarif src
+        run: npx eslint -f @microsoft/eslint-formatter-sarif --output-file eslint-results.sarif src
         continue-on-error: true
           
       - name: Upload analysis results to GitHub
