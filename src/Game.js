@@ -19,7 +19,7 @@ export default function Game() {
     const [moveSortOrder, setMoveSortOrder] = useState(0); // ascending/descending
     const [moveNoPositionAssociation, setMoveNoPositionAssociation] = useState([]); // move no -> position index
 
-    let displayLastMoveLine = false;
+   // let displayLastMoveLine = false;
 
     // function handle sent to child so it can return the
     // last move line
