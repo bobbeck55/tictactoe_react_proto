@@ -12,9 +12,6 @@ permissions:
 
 jobs:
   Analysis:
-
-jobs:
-  Analysis:
     runs-on: ubuntu-latest
 
     steps:
