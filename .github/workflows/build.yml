@@ -32,7 +32,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           npx sonar-scanner \
-            -Dsonar.projectKey=my-react-project \
+            -Dsonar.projectKey=squ_c987907e378b60614a9948db580139ffda6fc419 \
             -Dsonar.sources=. \
             -Dsonar.host.url=$SONAR_HOST_URL \
             -Dsonar.login=$SONAR_TOKEN
