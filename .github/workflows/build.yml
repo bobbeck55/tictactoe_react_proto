@@ -26,4 +26,5 @@ jobs:
         with:
           node-version: 14.x
       
-
+      - name: Run the project
+        run: npm start
