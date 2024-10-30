@@ -25,7 +25,29 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 14.x
-      
+          
+      - name: Install WireGuard run
+          sudo apt-get update 
+          sudo apt-get install wireguard
+        
+      - name: Configure WireGuard
+        run: |
+          umask 077
+          wg genkey > privatekey
+          wg pubkey < privatekey > publickey
+          echo "[Interface]" > wg0.conf
+          echo "Address = 192.168.1.1/24" >> wg0.conf
+          echo "ListenPort = 51820" >> wg0.conf
+          echo "PrivateKey = $(cat privatekey)" >> wg0.conf
+          echo "[Peer]" >> wg0.conf
+          echo "PublicKey = $(cat publickey)" >> wg0.conf
+          echo "AllowedIPs = 192.168.1.2/32" >> wg0.conf
+          echo "Endpoint = <peer_endpoint_ip>:51820" >> wg0.conf
+          sudo ip link add dev wg0 type wireguard
+          sudo ip address add dev wg0 192.168.1.1/24
+          sudo ip link set up dev wg0
+          sudo wg-quick up wg0
+
       - name: Analyze with SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
