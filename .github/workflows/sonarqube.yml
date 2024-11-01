@@ -10,14 +10,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker
+      - name: Set up Docker Builds
         uses: docker/setup-buildx-action@v1
 
-      - name: Pull and run SonarQube container
+      - name: Start custom SonarQube container
         run: |
-          docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
-          # Wait for SonarQube to be fully operational
-          until curl -s http://localhost:9000 > /dev/null; do sleep 5; done
+          docker run -d --name sonarqube -p 9000:9000 your-docker-repo/sonarqube-custom:latest \
+          until curl -s http://localhost:9000 > /dev/null; do sleep 20; done
+          
+      name: Extract SonarQube token
+        id: token
+        run: |
+            token=$(curl -X POST -u admin:admin -d "name=GitHubActionsToken" -d "login=admin" -d "password=admin" -d "permissions=user" http://localhost:9000/api/users/generate | jq -r '.token') echo "::set-output name=SONARQUBE_TOKEN::$token"
 
       - name: Run SonarQube Scanner
         env:
