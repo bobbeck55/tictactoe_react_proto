@@ -1,25 +1,30 @@
-name: SonarQube Scan
+name: Run SonarQube with Docker Compose
 
-on:
+on: 
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
-  sonarqube:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: SonarQube Scan
-        uses: sonarsource/sonarqube-scan-action@v2.1.0
-        with:
-          args: >
-            -Dsonar.projectKey=your_project_key
-            -Dsonar.sources=.
-            -Dsonar.host.url=http://localhost:9000
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Build and push
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: false
+
+    - name: Run Docker Compose
+      run: docker-compose up -d
