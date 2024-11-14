@@ -50,8 +50,8 @@ jobs:
 
     - name: Verify Sonarqube scanner installation
       run: |
-        sonar-scanner --version
-        which sondar-scanner
+        echo $PATH
+        which sonar-scanner
       shell: bash
 
     - name: Run SonarQube Scan
