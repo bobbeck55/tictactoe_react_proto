@@ -45,10 +45,15 @@ jobs:
         export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
         echo $PATH
         sonar-scanner --version # Verify the installation
+      shell: bash
+
+    - name: Verify Sonarqube scanner installation
+      run: sonar-scanner --version
+      shell: bash
 
     - name: Run SonarQube Scan
       run: | 
-        sonar-scanner \
+        ./sonar-scanner \
           -Dsonar.projectKey=your_project_key \
           -Dsonar.sources=. \
           -Dsonar.host.url=http://localhost:9000 \
