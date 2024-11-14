@@ -17,6 +17,12 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+          docker-compose --version # Check if Docker Compose is installed
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
