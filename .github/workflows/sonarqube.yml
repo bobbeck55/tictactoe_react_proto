@@ -49,7 +49,7 @@ jobs:
 
     - name: Verify Sonarqube scanner installation
       run: |
-        echo PATH
+        echo $PATH
         which sonar-scanner
       shell: bash
 
