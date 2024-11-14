@@ -42,8 +42,7 @@ jobs:
       run: |
         wget -q -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
         unzip sonar-scanner.zip
-        echo "${{ github.workspace }}/sonar-scanner-4.6.2.2472-linux/bin" >> $GITHUB_PATH
-        echo $GITHUB_PATH
+        export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
         sonar-scanner --version # Verify the installation
         which sonar-scanner
       shell: bash
@@ -51,6 +50,7 @@ jobs:
     - name: Verify Sonarqube scanner installation
       run: |
         echo $PATH
+        ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner --version
         which sonar-scanner
       shell: bash
 
