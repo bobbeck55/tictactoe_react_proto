@@ -37,3 +37,29 @@ jobs:
 
     - name: Run Docker Compose
       run: docker-compose up -d
+
+    - name: Run SonarQube Scan
+      run: | 
+        sonar-scanner \
+          -Dsonar.projectKey=your_project_key \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=http://localhost:9000 \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+    - name: Save SonarQube Scan Results
+      run: |
+        mkdir -p sonarqube-results
+        cp -r /opt/sonarqube/data/es6 sonarqube-results/ # This path depends on how SonarQube stores results
+      continue-on-error: true
+      
+    - name: Commit results to repository
+      run: |
+        git config --global user.name 'github-actions'
+        git config --global user.email 'github-actions@github.com'
+        git add sonarqube-results
+        git commit -m 'Add SonarQube scan results'
+        git push
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
