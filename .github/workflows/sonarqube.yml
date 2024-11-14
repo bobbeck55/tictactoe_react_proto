@@ -1,30 +1,25 @@
-name: Run SonarQube Analysis
+name: SonarQube Scan
 
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
-  sonar:
+  sonarqube:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
-      - name: Set up Docker Builds
-        uses: docker/setup-buildx-action@v1
-
-      - name: Start custom SonarQube container
-        run: |
-          docker run -d --name sonarqube -p 9000:9000 your-docker-repo/sonarqube-custom:latest \
-          until curl -s http://localhost:9000 > /dev/null; do sleep 20; done
-          
-      name: Extract SonarQube token
-        id: token
-        run: |
-            token=$(curl -X POST -u admin:admin -d "name=GitHubActionsToken" -d "login=admin" -d "password=admin" -d "permissions=user" http://localhost:9000/api/users/generate | jq -r '.token') echo "::set-output name=SONARQUBE_TOKEN::$token"
-
-      - name: Run SonarQube Scanner
+      - name: SonarQube Scan
+        uses: sonarsource/sonarqube-scan-action@v2.1.0
+        with:
+          args: >
+            -Dsonar.projectKey=your_project_key
+            -Dsonar.sources=.
+            -Dsonar.host.url=http://localhost:9000
         env:
-          SONAR_HOST_URL: "http://localhost:9000"
-          SONAR_LOGIN: ${{ secrets.SONARQUBE_TOKEN }}
-        run: |
-          sonar-scanner -Dsonar.projectKey=tictactoe_react_proto -Dsonar.sources=./src
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
