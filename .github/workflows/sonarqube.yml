@@ -58,7 +58,7 @@ jobs:
       run: |
         echo PATH
         which sonar-scanner
-        sonar-scanner \
+        ./sonar-scanner-4.6.2.2472-linux/bin/sonar-scanner \
           -Dsonar.projectKey=your_project_key \
           -Dsonar.sources=. \
           -Dsonar.host.url=http://localhost:9000 \
