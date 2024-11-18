@@ -38,6 +38,28 @@ jobs:
     - name: Run Docker Compose
       run: docker-compose up -d
 
+    - name: Wait for SonarQube to be ready
+      run: |
+        echo "Waiting for SonarQube to start..."
+        while ! curl -sSf http://localhost:9000; do
+          sleep 10
+          echo "Waiting for SonarQube..."
+        done
+        echo "SonarQube is up and running!"
+
+    - name: Install Ngrok
+      run: |
+        wget -q -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+        unzip ngrok.zip
+        
+    - name: Start Ngrok
+      run: |
+        ./ngrok http 9000 > /dev/null & sleep 5 # Wait for Ngrok to establish the tunnel
+        curl --silent http://localhost:4040/api/tunnels # Get the public URL
+        
+    - name: Print Ngrok Public URL
+      run: curl --silent http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url'
+
     - name: Install SonarQube Scanner
       run: |
         wget -q -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
